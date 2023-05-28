@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="proyectoMagda:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/proyectoMagda_jar</output-path>
+    <root id="archive" name="proyectoMagda.jar">
+      <element id="module-output" name="proyectoMagda" />
+    </root>
+  </artifact>
+</component>
