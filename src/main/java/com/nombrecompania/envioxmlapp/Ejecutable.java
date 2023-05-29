@@ -1,12 +1,9 @@
 package com.nombrecompania.envioxmlapp;
 
 import com.nombrecompania.envioxmlapp.actions.EnviarXmlAction;
-import com.nombrecompania.envioxmlapp.exceptions.ErrorCerrandoConexionException;
-import com.nombrecompania.envioxmlapp.exceptions.ErrorDeConexionException;
-import com.nombrecompania.envioxmlapp.exceptions.ErrorEnviandoDatosException;
+import com.nombrecompania.envioxmlapp.exceptions.*;
 import com.nombrecompania.envioxmlapp.utils.ValidacionUtil;
 
-import java.net.InetAddress;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,20 +21,16 @@ public class Ejecutable {
         String identificador;
         int op;
         if(args.length>0){
-            do {
-                op=0;
-                IPDeEnvio = args[0];
-                if(!ValidacionUtil.isValidIp(IPDeEnvio))op++;
-            }while(op!=0);
-            do{
-                op=0;
-                puerto=Integer.parseInt(args[1]);
-                if(!ValidacionUtil.isValidPuerto(puerto)){
-                    op++;
-                    System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
-                }
-            }while(op!=0);
+            try{
+            IPDeEnvio = args[0];
+            puerto=Integer.parseInt(args[1]);
             identificador=args[2];
+            if(!ValidacionUtil.isValidIp(IPDeEnvio))  throw new IPInvalidaException("La IP no es válida");
+            if(!ValidacionUtil.isValidPuerto(puerto)) throw  new PuertoInvalidoException("El puerto no es válido");
+            } catch (IPInvalidaException | PuertoInvalidoException e) {
+                System.err.println("Argumento invalido "+e.getMessage());
+                throw new RuntimeException();
+            }
         }else{
             do {
                 op=0;
