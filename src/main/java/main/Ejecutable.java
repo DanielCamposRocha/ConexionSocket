@@ -38,7 +38,19 @@ public class Ejecutable {
             throw new RuntimeException(e);
         }
         identificador=pedirString("Introduzca identificador");
-        System.out.println(EnviarXmlAction.enviarXML(ip,puerto,identificador));
+
+
+        try {       
+	  ConexionCliente conexionCliente = new ConexionCliente(ip, puerto);
+          String mensaje = new EnviarXmlAction(conexionCliente).enviarXML(identificador);
+          conexionCliente.cerrarConexion()
+        } catch (RuntimeException ex) {
+          System.out.println(¨Problema enviando el mensaje. ¨ + ex.getMessage());
+        }
+       
+
+        
+
     }
 
 

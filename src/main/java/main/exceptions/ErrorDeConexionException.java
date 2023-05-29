@@ -1,4 +1,4 @@
-package main;
+package com.nombrecompania.envioxmlapp.exceptions;
 
 import java.io.IOException;
 

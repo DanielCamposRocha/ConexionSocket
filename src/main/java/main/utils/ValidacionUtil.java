@@ -1,7 +1,7 @@
-package main;
+package com.nombrecompania.envioxmlapp.utils;
 
 
-public class Util {
+public class ValidacionUtil {
     /**
      * válida el número de puerto, tiene que estar entre 0 y 65535
      * @param puerto
