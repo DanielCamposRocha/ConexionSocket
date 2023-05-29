@@ -21,12 +21,14 @@ class EnviarXmlActionTest {
     void enviarXmlPuertoINCorrecto() throws UnknownHostException {
         InetAddress ip= InetAddress.getByName("127.0.0.1");
         assertEquals("La conexion no se ha podido establecer",EnviarXmlAction.enviarXML(ip,50000, "prueba"));
+        //controla que devuelve el valor adecuado en caso de no conectarse al servidor por puerto incorrecto
     }
 
     @Test
     void enviarXmlIPINCorrecta() throws UnknownHostException {
         InetAddress ip= InetAddress.getByName("250.0.0.1");
         assertEquals("La conexion no se ha podido establecer",EnviarXmlAction.enviarXML(ip,45000, "prueba"));
+        //controla que devuelve el valor adecuado en caso de no conectarse al servidor por ip incorrecta
     }
 }
 /**

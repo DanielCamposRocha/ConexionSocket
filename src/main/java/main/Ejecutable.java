@@ -39,6 +39,7 @@ public class Ejecutable {
         }
         identificador=pedirString("Introduzca identificador");
 
+
         try {       
 	  ConexionCliente conexionCliente = new ConexionCliente(ip, puerto);
           String mensaje = new EnviarXmlAction(conexionCliente).enviarXML(identificador);
@@ -47,6 +48,9 @@ public class Ejecutable {
           System.out.println(¨Problema enviando el mensaje. ¨ + ex.getMessage());
         }
        
+
+        
+
     }
 
 

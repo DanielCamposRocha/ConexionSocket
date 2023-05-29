@@ -57,7 +57,11 @@ class UtilTest {
      */
     @Test
     public void testInvalidIPTextFormat(){
-          assertThrows(NumberFormatException.class,()->Util.isValidIp("abc.168.0.1"));
-
+        PrintStream originalOut=System.out;
+        ByteArrayOutputStream outcontent=new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outcontent));
+        Util.isValidIp("abc.168.0.1");
+        assertEquals("Formato no valido: Por favor recuerde que la ip debe estar en formato de numeros decimales",outcontent.toString().trim());
+        System.setOut(originalOut);
     }
 }
