@@ -38,7 +38,7 @@ public class Ejecutable {
             throw new RuntimeException(e);
         }
         identificador=pedirString("Introduzca identificador");
-        EnviarXmlAction.enviarXML(ip,puerto,identificador);
+        System.out.println(EnviarXmlAction.enviarXML(ip,puerto,identificador));
     }
 
 
