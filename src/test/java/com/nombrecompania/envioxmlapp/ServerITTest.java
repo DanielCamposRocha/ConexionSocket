@@ -1,4 +1,4 @@
-package main;
+package com.nombrecompania.envioxmlapp;
 
 import org.junit.jupiter.api.Test;
 

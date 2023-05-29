@@ -7,7 +7,7 @@ public class ValidacionUtil {
      * @param puerto
      * @return
      */
-    static boolean isValidPuerto(int puerto) {
+    public static boolean isValidPuerto(int puerto) {
         return !(puerto < 0 | puerto > 65535);
     }
 
@@ -18,7 +18,7 @@ public class ValidacionUtil {
      * @param ipDeEnvio
      * @return
      */
-    static boolean isValidIp( String ipDeEnvio) {
+    public static boolean isValidIp(String ipDeEnvio) {
         String[] numIP=ipDeEnvio.split("\\.");
         if(numIP.length !=4) return false;
         try {

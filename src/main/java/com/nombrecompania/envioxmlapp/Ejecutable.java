@@ -1,4 +1,10 @@
-package main;
+package com.nombrecompania.envioxmlapp;
+
+import com.nombrecompania.envioxmlapp.actions.EnviarXmlAction;
+import com.nombrecompania.envioxmlapp.exceptions.ErrorCerrandoConexionException;
+import com.nombrecompania.envioxmlapp.exceptions.ErrorDeConexionException;
+import com.nombrecompania.envioxmlapp.exceptions.ErrorEnviandoDatosException;
+import com.nombrecompania.envioxmlapp.utils.ValidacionUtil;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,34 +28,34 @@ public class Ejecutable {
         do {
             op=0;
             IPDeEnvio = pedirString("Introduzca IP a la que enviar la extension");
-            if(!Util.isValidIp(IPDeEnvio))op++;
+            if(!ValidacionUtil.isValidIp(IPDeEnvio))op++;
         }while(op!=0);
         do{
             op=0;
             puerto=pedirInt("Introduzca puerto de envio");
-            if(!Util.isValidPuerto(puerto)){
+            if(!ValidacionUtil.isValidPuerto(puerto)){
                 op++;
                 System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
             }
         }while(op!=0);
-        try {
-            ip= InetAddress.getByName(IPDeEnvio);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+
         identificador=pedirString("Introduzca identificador");
 
 
-        try {       
-	  ConexionCliente conexionCliente = new ConexionCliente(ip, puerto);
-          String mensaje = new EnviarXmlAction(conexionCliente).enviarXML(identificador);
-          conexionCliente.cerrarConexion()
+        try {
+          ConexionCliente conexionCliente = new ConexionCliente(IPDeEnvio, puerto);
+          new EnviarXmlAction(conexionCliente).enviarXML(identificador);
+          conexionCliente.cerrarConexion();
         } catch (RuntimeException ex) {
-          System.out.println(¨Problema enviando el mensaje. ¨ + ex.getMessage());
+          System.out.println("Problema enviando el mensaje. " + ex.getMessage());
+        } catch (ErrorDeConexionException e) {
+            throw new RuntimeException(e);
+        } catch (ErrorCerrandoConexionException e) {
+            throw new RuntimeException(e);
+        } catch (ErrorEnviandoDatosException e) {
+            throw new RuntimeException(e);
         }
-       
 
-        
 
     }
 
