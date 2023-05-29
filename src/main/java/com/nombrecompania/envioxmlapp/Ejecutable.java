@@ -15,29 +15,44 @@ import java.util.Scanner;
  */
 public class Ejecutable {
     public static void main(String[] args) {
-        app();
+        app(args);
     }
 
-    private static void app() {
+    private static void app(String[] args) {
         String IPDeEnvio;
         int puerto;
         String identificador;
         int op;
-        InetAddress ip;
-        do {
-            op=0;
-            IPDeEnvio = pedirString("Introduzca IP a la que enviar la extension");
-            if(!ValidacionUtil.isValidIp(IPDeEnvio))op++;
-        }while(op!=0);
-        do{
-            op=0;
-            puerto=pedirInt("Introduzca puerto de envio");
-            if(!ValidacionUtil.isValidPuerto(puerto)){
-                op++;
-                System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
-            }
-        }while(op!=0);
-        identificador=pedirString("Introduzca identificador");
+        if(args.length>0){
+            do {
+                op=0;
+                IPDeEnvio = args[0];
+                if(!ValidacionUtil.isValidIp(IPDeEnvio))op++;
+            }while(op!=0);
+            do{
+                op=0;
+                puerto=Integer.parseInt(args[1]);
+                if(!ValidacionUtil.isValidPuerto(puerto)){
+                    op++;
+                    System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
+                }
+            }while(op!=0);
+            identificador=args[2];
+        }else{
+            do {
+                op=0;
+                IPDeEnvio = pedirString("Introduzca IP a la que enviar la extension");
+                if(!ValidacionUtil.isValidIp(IPDeEnvio))op++;
+            }while(op!=0);
+            do{
+                op=0;
+                puerto=pedirInt("Introduzca puerto de envio");
+                if(!ValidacionUtil.isValidPuerto(puerto)){
+                    op++;
+                    System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
+                }
+            }while(op!=0);
+            identificador=pedirString("Introduzca identificador");}
         try {
           ConexionCliente conexionCliente = new ConexionCliente(IPDeEnvio, puerto);
           new EnviarXmlAction(conexionCliente).enviarXML(identificador);
@@ -51,12 +66,7 @@ public class Ejecutable {
         } catch (ErrorEnviandoDatosException e) {
             System.out.println("Problema enviando los datos. "+ e.getMessage());
         }
-
-
     }
-
-
-
 
     public static String pedirString(String textoimpreso){
         Scanner scn=new Scanner(System.in);
