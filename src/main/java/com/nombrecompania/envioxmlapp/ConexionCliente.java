@@ -23,7 +23,7 @@ public class ConexionCliente {
      } catch (UnknownHostException e) {
          throw new RuntimeException(e);
      }catch (IOException e) {
-            throw new ErrorDeConexionException(e);
+         throw new ErrorDeConexionException(e);
         }
   }
 
@@ -31,11 +31,11 @@ public class ConexionCliente {
      try {
 
      OutputStream os =socket.getOutputStream();
-            DataOutputStream osw=new DataOutputStream(os);
-            osw.writeUTF(datos);
-            osw.flush();
-            osw.close();
-            os.close();
+     DataOutputStream osw=new DataOutputStream(os);
+     osw.writeUTF(datos);
+     osw.flush();
+     osw.close();
+     os.close();
   } catch (IOException e) {
             throw new ErrorEnviandoDatosException(e);
         }

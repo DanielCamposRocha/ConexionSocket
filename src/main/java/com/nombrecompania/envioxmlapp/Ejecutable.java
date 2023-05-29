@@ -7,7 +7,6 @@ import com.nombrecompania.envioxmlapp.exceptions.ErrorEnviandoDatosException;
 import com.nombrecompania.envioxmlapp.utils.ValidacionUtil;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -38,10 +37,7 @@ public class Ejecutable {
                 System.out.println("Recuerde por favor, debe introducir un numero entero entre 0 y 65535");
             }
         }while(op!=0);
-
         identificador=pedirString("Introduzca identificador");
-
-
         try {
           ConexionCliente conexionCliente = new ConexionCliente(IPDeEnvio, puerto);
           new EnviarXmlAction(conexionCliente).enviarXML(identificador);
@@ -49,11 +45,11 @@ public class Ejecutable {
         } catch (RuntimeException ex) {
           System.out.println("Problema enviando el mensaje. " + ex.getMessage());
         } catch (ErrorDeConexionException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problema creando la conexión. "+ e.getMessage());
         } catch (ErrorCerrandoConexionException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problema cerrando la conexión. "+ e.getMessage());
         } catch (ErrorEnviandoDatosException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problema enviando los datos. "+ e.getMessage());
         }
 
 
