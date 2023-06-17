@@ -1,6 +1,6 @@
 package com.nombrecompania.envioxmlapp.actions;
 
-import com.nombrecompania.envioxmlapp.ConexionCliente;
+import com.nombrecompania.envioxmlapp.connections.ConexionCliente;
 import com.nombrecompania.envioxmlapp.exceptions.ErrorEnviandoDatosException;
 
 

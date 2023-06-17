@@ -1,6 +1,7 @@
 package com.nombrecompania.envioxmlapp;
 
 import com.nombrecompania.envioxmlapp.actions.EnviarXmlAction;
+import com.nombrecompania.envioxmlapp.connections.ConexionCliente;
 import com.nombrecompania.envioxmlapp.exceptions.ErrorDeConexionException;
 import com.nombrecompania.envioxmlapp.exceptions.ErrorEnviandoDatosException;
 import org.junit.jupiter.api.Test;
